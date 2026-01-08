@@ -16,22 +16,37 @@ def showTasks():
         
 
 def editTask():
+    showTasks()
     task = input("Choose task to edit: ")
-    changedTask = input("Change task: ")
-    for i in tasks:
-        if i == task:
-            tasks[tasks.index(i)] = changedTask 
+    if task in tasks:
+        changedTask = input("Change task: ")
+        for i in tasks:
+            if i == task:
+                tasks[tasks.index(i)] = changedTask 
+    else:
+        print("There's no such task")
+        editTask()
             
 def removeTask():
+    showTasks()
     task = input("Choose task to remove: ")
-    pos = tasks.index(task)
-    tasks.remove(task)
-    del completionState[pos]
+    if task in tasks:
+        pos = tasks.index(task)
+        tasks.remove(task)
+        del completionState[pos]
+    else:
+        print("There's no such task.")
+        removeTask()
 
 def completed():
     task = input("Enter task name to mark completed: ")
-    pos = tasks.index(task)
-    completionState[pos] = "Completed"
+    if task in tasks:
+        pos = tasks.index(task)
+        completionState[pos] = "Completed"
+        print(task + ": " + completionState[pos])
+    else:
+        print("There's no such task.")
+        completed()
 
 def greetings():
     print("Welcome to my first project by myself!")
